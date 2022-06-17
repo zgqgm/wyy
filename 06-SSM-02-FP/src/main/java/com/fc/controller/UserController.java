@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
+
 @RestController
 @RequestMapping("user")
 public class UserController {
@@ -25,13 +28,24 @@ public class UserController {
         return userService.update(user);
     }
 
-    @RequestMapping("getList")
-    public ResultVo list(@RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize, Long id){
-        return userService.list(pageNo,pageSize,id);
+    @RequestMapping("getlist")
+    public ResultVo list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize, @RequestParam(value = "name")String name){
+        return userService.list(pageNum,pageSize,name);
     }
 
     @RequestMapping("add")
     public ResultVo add(@RequestBody User user){
         return userService.add(user);
     }
+
+    @RequestMapping("checkUser")
+    public ResultVo login(@RequestBody User user){
+        return userService.login(user.getUsername(), user.getPassword());
+    }
+
+    @RequestMapping("verifyToken")
+    public Map<String, Object> verify(String token) {
+        return userService.verify(token);
+    }
+
 }

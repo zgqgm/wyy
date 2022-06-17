@@ -4,32 +4,31 @@ import com.fc.entity.Collection;
 import com.fc.service.CollectionService;
 import com.fc.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
-@RequestMapping("collect")
+@RequestMapping("collection")
 public class CollectionController {
     @Autowired
     private CollectionService collectionService;
 
     @RequestMapping("add")
-    public ResultVo add(Collection collection){
+    public ResultVo add(@RequestBody Collection collection){
         return collectionService.add(collection);
     }
 
-    @RequestMapping("del")
+    @RequestMapping("delete")
     public ResultVo del(Long id){
         return collectionService.del(id);
     }
 
-    @RequestMapping("list")
-    public ResultVo list(@RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize, Long id){
-        return collectionService.list(pageNo,pageSize,id);
+    @RequestMapping("getlist")
+    public ResultVo list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize, @RequestParam(value = "name",required = false)String name){
+        return collectionService.list(pageNum,pageSize,name);
     }
     @RequestMapping("update")
-    public ResultVo update(Collection collection){
+    public ResultVo update(@RequestBody Collection collection){
         return collectionService.update(collection);
     }
 }

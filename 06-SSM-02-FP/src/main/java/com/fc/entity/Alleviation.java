@@ -1,25 +1,27 @@
 package com.fc.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Alleviation {
     private Long id;
 
+    @JsonFormat(pattern = "yyyy年MM月dd日 HH时mm分ss秒")
     private Date createTime;
 
     private String title;
 
     private String type;
-
+    @JsonFormat(pattern = "yyyy年MM月dd日 HH时mm分ss秒")
     private Date releaseTime;
 
     private String cover;
 
+    @JsonFormat(pattern = "yyyy年MM月dd日 HH时mm分ss秒")
     private Date lastClickTime;
 
     private Integer clickNum;
-
-    private String content;
 
     public Long getId() {
         return id;
@@ -85,11 +87,4 @@ public class Alleviation {
         this.clickNum = clickNum;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
 }
